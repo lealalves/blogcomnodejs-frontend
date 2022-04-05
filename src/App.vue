@@ -16,8 +16,8 @@ hr {
   border: 1px solid #56818133;
   margin: 15px 0;
 }
-a:visited{
-  color: inherit
+a{
+  color: inherit;
 }
 .card_text{
     margin: 10px 0;
