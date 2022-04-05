@@ -34,6 +34,7 @@ import Button from "../components/Button.vue";
 import Data from "../components/Data.vue"
 import Message from '../components/Message.vue'
 
+
 export default {
   name: "Home",
   components: {
@@ -52,7 +53,8 @@ export default {
   },
   methods: {
     async getPostagens() {
-      const req = await fetch('/api/')
+
+      const req = await fetch(`${process.env.VUE_APP_API_URL}`)
 
       const res = await req.json()
       

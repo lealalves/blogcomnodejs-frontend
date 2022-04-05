@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         async deletePostagem(id){
-            const req = await fetch(`api/admin/postagens/deletar/${id}`)
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens/deletar/${id}`)
 
             const res = await req.json()
 

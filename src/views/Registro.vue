@@ -55,7 +55,8 @@ export default {
 
       const dataJson = JSON.stringify(data)
 
-      const req = await fetch('api/usuarios/registro', {
+
+      const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios/registro`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: dataJson

@@ -40,7 +40,7 @@ export default {
 		},
 		methods: {
 			async getPostagem() {
-				const req = await fetch(`/api/postagem/${this.slug}`)
+				const req = await fetch(`${process.env.VUE_APP_API_URL}postagem/${this.slug}`)
 
 				const res = await req.json()
 

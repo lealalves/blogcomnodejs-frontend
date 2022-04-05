@@ -46,7 +46,7 @@ export default {
 
             const dataJson = JSON.stringify(data)
 
-            const req = await fetch('/api/admin/categorias/nova', {
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categorias/nova`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: dataJson

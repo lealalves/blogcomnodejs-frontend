@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         async getCategorias() {                        
-            const req = await fetch('api/admin/categorias')
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categorias`)
 
             const res = await req.json()
             if(!res.ok){

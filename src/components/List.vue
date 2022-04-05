@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         async deleteCategoria(id){
-            const req = await fetch(`/api/admin/categoria/deletar/${id}`)
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categoria/deletar/${id}`)
 
             const res = await req.json()
 

@@ -56,7 +56,7 @@ export default {
     },
     methods: {
         async getCategorias() {                        
-            const req = await fetch('/api/admin/categorias')
+            const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categorias`)
 
             const res = await req.json()
             this.categorias_data = res.categorias
@@ -73,7 +73,7 @@ export default {
 
             const dataJson = JSON.stringify(data)
 
-            const req = await fetch('/api/admin/postagens/nova', {
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens/nova`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: dataJson

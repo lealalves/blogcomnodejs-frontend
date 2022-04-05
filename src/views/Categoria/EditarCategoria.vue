@@ -46,7 +46,7 @@ export default {
     },
     methods: {
         async getUniqueCategoria(){
-            const req = await fetch(`/api/admin/categoria/editar/${this.id}`)
+            const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categoria/editar/${this.id}`)
 
             const res = await req.json()
 
@@ -67,7 +67,7 @@ export default {
 
             const dataJson = JSON.stringify(data)
 
-            const req = await fetch('/api/admin/categoria/editar', {
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categoria/editar`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: dataJson

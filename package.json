@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "postinstall": "npm run build",
+    "install:clean": "rm -rf node_modules/ && package-lock.json && npm install && npm run dev"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",

@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     async getPostagens() {
-      const req = await fetch(`/api/categorias/${this.slug}`)
+      const req = await fetch(`${process.env.VUE_APP_API_URL}categorias/${this.slug}`)
 
       const res = await req.json()
 

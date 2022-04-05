@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         async getUniquePostagem(){
-            const req = await fetch(`/api/admin/postagens/editar/${this.id}`)
+            const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/postagens/editar/${this.id}`)
 
             const res = await req.json()
 
@@ -90,7 +90,7 @@ export default {
 
             const dataJson = JSON.stringify(data)
 
-            const req = await fetch('/api/admin/postagens/editar', {
+            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens/editar`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: dataJson
