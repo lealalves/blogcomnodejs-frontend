@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     async logout() {
-      const req = await fetch("/api/usuarios/logout");
+      const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios/logout`);
 
       const res = await req.json();
 
@@ -42,7 +42,7 @@ export default {
       }
     },
     async checkUser() {
-        const req = await fetch('/api/usuarios')
+        const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`)
   
         const res = await req.json()
 
