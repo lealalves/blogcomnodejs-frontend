@@ -49,7 +49,6 @@ export default {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: dataJson,
-        credentials: 'include'
       })
 
       const res = await req.json()
