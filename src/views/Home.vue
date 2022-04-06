@@ -20,7 +20,7 @@
               <Button text="Saiba mais" />
             </router-link>
             <hr />
-            <small>Categoria: {{postagem.categoria.nome}}</small><br>
+            <small>{{postagem.categoria ? 'Categoria: ' + postagem.categoria.nome : ''}}</small><br>
             <small>Data de criação: <Data :data_atual="postagem.date" /></small>
           </div>
       </div>
