@@ -48,7 +48,8 @@ export default {
       const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: dataJson
+        body: dataJson,
+        credentials: 'include'
       })
 
       const res = await req.json()

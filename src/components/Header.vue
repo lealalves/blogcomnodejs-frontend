@@ -42,7 +42,9 @@ export default {
       }
     },
     async checkUser() {
-        const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`)
+        const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`, {
+          credentials: 'include'
+        })
   
         const res = await req.json()
 
