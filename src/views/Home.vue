@@ -4,14 +4,14 @@
     <div id="container_principal">
       <Message v-show="ok" :msg="ok" />
       <div id="jumbotron">
-        <h1 class="jumbo_title">Bem-vindo ao Blog do Node</h1>
+        <h1 class="jumbo_title">Bem-vindo ao Blog do Leal!</h1>
         <p class="jumbo_paragrafo">
           Este é um BLOG simples, desenvolvido com Vue.js + Node.js + MongoDB.
         </p>
-        <p class="jumbo_paragrafo">
-          Feito por Leal - <a href="https://www.github.com/lealalves">github.com/lealalves</a>
-        </p>        
         <router-link to="/registro"><Button text="Crie uma conta" /></router-link>
+        <p class="jumbo_paragrafo">
+          Feito por Vinicius Leal - <a href="https://www.github.com/lealalves">github.com/lealalves</a>
+        </p> 
       </div>
       <hr />
       <div id="postagens_container">
