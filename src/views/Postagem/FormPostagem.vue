@@ -86,7 +86,7 @@ export default {
                 console.log(res);
             } else{
                 this.$router.push({
-                    name: 'Postagens',
+                    name: 'Home',
                     params: {
                         ok: res.texto
                     }

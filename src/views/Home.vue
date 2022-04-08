@@ -8,12 +8,15 @@
         <p class="jumbo_paragrafo">
           Este é um BLOG simples, desenvolvido com Vue.js + Node.js + Express + MongoDB.
         </p>
+        <p class="jumbo_paragrafo">
+          Feito por Leal - <a href="https://www.github.com/lealalves">github.com/lealalves</a>
+        </p>        
         <router-link to="/registro"><Button text="Crie uma conta" /></router-link>
       </div>
       <hr />
       <div id="postagens_container">
           <h1 class="lista_titulo">Postagens recentes:</h1>
-          <div v-for="postagem in postagens_data" :key="postagem.id" id="postagem_container">
+          <div id="postagem_container" v-for="postagem in postagens_data" :key="postagem.id" >
             <h2 class="postagem_titulo">{{postagem.titulo}}</h2>
             <p class="jumbo_paragrafo">{{postagem.descricao}}</p>
             <router-link :to="{name: 'Postagem', params: {slug: postagem.slug}}">
@@ -102,5 +105,6 @@ export default {
   border: 1px solid rgb(223, 223, 223);
   border-radius: 5px;
   margin: 30px 0;
+  word-break: break-all;
 }
 </style>

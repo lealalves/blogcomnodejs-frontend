@@ -30,7 +30,8 @@ const routes = [
   {
     path: '/Login',
     name: 'Login',
-    component: Login
+    component: Login,
+    props: true
   },
   {
     path: '/postagem/:slug',

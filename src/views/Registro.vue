@@ -68,7 +68,7 @@ export default {
         this.msgs = res
       } else {
         this.$router.push({
-          name: 'Home',
+          name: 'Login',
           params: {
               ok: res.texto
           }

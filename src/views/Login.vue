@@ -3,6 +3,7 @@
     <Header />
     <div id="container_principal">
         <Message v-for="msg in msgs" :key="msg.id" :msg="msg.texto" />
+        <Message v-show="ok" :msg="ok" />
         <div id="form_container">
         <h2 class="form_title">Login:</h2>
             <p>E-mail:</p>
@@ -35,6 +36,9 @@ export default {
       email: '',
       senha: ''
     }
+  },
+  props: {
+    ok: String,
   },
   methods: {
     async login() {

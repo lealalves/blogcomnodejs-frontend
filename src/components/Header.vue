@@ -5,6 +5,7 @@
       <router-link to="/"><li>Home</li></router-link>
       <router-link to="/categorias"><li>Categorias</li></router-link>
       <router-link v-show="user_data && user_data.eAdmin == 1" to="/postagens"><li>Postagens</li></router-link>
+      <router-link v-show="user_data && user_data.eAdmin == 0" to="/postagens/add"><li>Criar postagem</li></router-link>
       <router-link v-show="user_data && user_data.eAdmin == 1" to="/listacategorias"><li>Lista de Categorias</li></router-link>
       <router-link v-show="!isAuth" to="/login"><li>Login</li></router-link>
       <router-link v-show="!isAuth" to="/registro"><li>Registrar</li></router-link>
@@ -70,11 +71,6 @@ export default {
           title: 'Home',
           is: 'router-link',
           url: '/'
-        },
-        {
-          title: 'Postagens',
-          is: 'router-link',
-          url: '/postagens'
         },
         {
           title: 'Categorias',
@@ -167,6 +163,9 @@ export default {
   justify-content: flex-end;
 }
 #header_user li{
+  max-width: 40vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 10px;
   background-color: #ffffff;
   color: #222;
