@@ -1,126 +1,164 @@
 <template>
   <div id="header">
-    <router-link :to="{name: 'Home'}"><img id="imgLogo" src="../assets/logo.jpg" alt="" srcset=""></router-link>
+    <router-link :to="{ name: 'Home' }"><img id="imgLogo" src="../assets/logo.jpg" alt="Logo"/></router-link>
     <ul v-show="!isMobile" id="header_links">
-      <router-link to="/"><li>Home</li></router-link>
-      <router-link to="/categorias"><li>Categorias</li></router-link>
-      <router-link v-show="user_data && user_data.eAdmin == 1" to="/postagens"><li>Postagens</li></router-link>
-      <router-link v-show="user_data && user_data.eAdmin == 0" to="/postagens/add"><li>Criar postagem</li></router-link>
-      <router-link v-show="user_data && user_data.eAdmin == 1" to="/listacategorias"><li>Lista de Categorias</li></router-link>
-      <router-link v-show="!isAuth" to="/login"><li>Login</li></router-link>
-      <router-link v-show="!isAuth" to="/registro"><li>Registrar</li></router-link>
+      <router-link v-for="link in header" :key="link" :to="link.url"><li>{{ link.title }}</li></router-link>
     </ul>
     <ul id="header_user">
       <Dropdown
-      v-show="isMobile || isAuth"
-      :title="isAuth ? `Bem-vindo, ${user_data.nome}!` : 'Menu'" 
-      :items="setItems"
+        v-show="isMobile"
+        :title="isAuth ? `Bem-vindo, ${user_data.nome}!` : 'Menu'"
+        :items="header"
+      />
+      <Dropdown
+        v-show="!isMobile && isAuth"
+        :title="isAuth ? `Bem-vindo, ${user_data.nome}!` : 'Menu'"
+        :items="[{title: 'Sair', url: '#', is:'p'}]"
       />
     </ul>
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
-import Dropdown from './Dropdown.vue'
-
+import { ref } from "@vue/reactivity";
+import Dropdown from "./Dropdown.vue";
 
 export default {
   name: "Header",
   components: {
-    Dropdown
+    Dropdown,
   },
   data() {
     return {
       user_data: null,
       windowWidth: ref(window.innerWidth),
-      desktop: [
+      header: [
         {
-          title: 'Sair',
-          is: 'p'
+          title: "Home",
+          url: "/",
+          is: "router-link",
+        },
+        {
+          title: "Categorias",
+          url: "/categorias",
+          is: "router-link",
         },
       ],
-      responsiveLogged: [
-        {
-          title: 'Home',
-          is: 'router-link',
-          url: '/'
-        },
-        {
-          title: 'Postagens',
-          is: 'router-link',
-          url: '/postagens'
-        },
-        {
-          title: 'Categorias',
-          is: 'router-link',
-          url: '/categorias',
-        },
-        {
-          title: 'Lista de Categorias',
-          is: 'router-link',
-          url: '/listacategorias',
-        },
-        {
-          title: 'Sair',
-          is: 'p',
-        }
-      ],
-      responsiveOffline: [
-        {
-          title: 'Home',
-          is: 'router-link',
-          url: '/'
-        },
-        {
-          title: 'Categorias',
-          is: 'router-link',
-          url: '/categorias',
-        },
-        {
-          title: 'Registrar',
-          is: 'router-link',
-          url: '/registro',
-        },
-        {
-          title: 'Login',
-          is: 'router-link',
-          url: '/login'
-        }
-      ]
-    }
+    };
   },
   computed: {
-    isMobile(){
-      return this.windowWidth < 550 ? true : false
+    isMobile() {
+      return this.windowWidth < 550 ? true : false;
     },
-    isAuth(){
-      return this.user_data != null ? true : false
+    isAuth() {
+      return this.user_data != null ? true : false;
     },
-    setItems(){
-      if(this.isMobile && this.isAuth){
-        return this.responsiveLogged
-      }else if (this.isMobile && !this.isAuth){
-        return this.responsiveOffline
-      }else return this.desktop 
-    }
   },
   methods: {
-    onWidthChange(){
-      this.windowWidth = window.innerWidth
+    headerItens() {
+      if(this.isMobile) {
+
+        if(!this.isAuth){
+          this.header.push(
+            {
+              title: "Login",
+              is: "router-link",
+              url: "/login",
+            },
+            {
+              title: "Registrar",
+              is: "router-link",
+              url: "/registro"
+            }
+          )
+        }else if(this.user_data.eAdmin == 1){
+          this.header.push(
+            {
+              title: "Lista de Categorias",
+              is: "router-link",
+              url: "/listacategorias",
+            },
+            {
+              title: "Postagens",
+              is: "router-link",
+              url: "/postagens",
+            },
+            {
+              title: "Sair",
+              is: "p",
+              url: "#",
+            },
+          )
+        } else {
+          this.header.push(
+            {
+              title: "Criar postagem",
+              is: "router-link",
+              url: "/postagens/add",
+            },
+            {
+              title: "Sair",
+              is: "p",
+              url: "#",
+            },
+          )
+        }
+      }
+      if(!this.isMobile){
+
+        if(!this.isAuth){
+            this.header.push(
+            {
+              title: "Login",
+              is: "router-link",
+              url: "/login",
+            },
+            {
+              title: "Registrar",
+              is: "router-link",
+              url: "/registro"
+            }
+          )
+        } else if(this.user_data.eAdmin == 1){
+          this.header.push(
+            {
+              title: "Lista de Categorias",
+              is: "router-link",
+              url: "/listacategorias",
+            },
+            {
+              title: "Postagens",
+              is: "router-link",
+              url: "/postagens",
+            },
+          )
+        } else {
+          this.header.push(
+            {
+              title: "Criar postagem",
+              is: "router-link",
+              url: "/postagens/add",
+            },
+          )
+        }
+      }
+    },
+    onWidthChange() {
+      this.windowWidth = window.innerWidth;
     },
     async checkUser() {
-        const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`)
-  
-        const res = await req.json()
+      const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`);
 
-        this.user_data = res.usuario
-    }
+      const res = await req.json();
+
+      this.user_data = res.usuario;
+      this.headerItens();
+    },
   },
   mounted() {
-    window.addEventListener('resize', this.onWidthChange)
-    this.checkUser()
-  }
+    window.addEventListener("resize", this.onWidthChange);
+    this.checkUser();
+  },
 };
 </script>
 
@@ -139,14 +177,14 @@ export default {
   width: 100%;
   align-items: center;
 }
-#header_links  li {
+#header_links li {
   padding: 10px;
   margin-left: 10px;
   text-align: center;
-  transition: .3s ease;
+  transition: 0.3s ease;
   border-radius: 10px;
 }
-#header_links li:hover{
+#header_links li:hover {
   background-color: #ffffff;
   color: #222;
 }
@@ -157,13 +195,13 @@ export default {
   margin-right: 20px;
   cursor: pointer;
 }
-#header_user{
+#header_user {
   display: flex;
   width: 100%;
   justify-content: flex-end;
 }
-#header_user li{
-  max-width: 40vw;
+#header_user li {
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 10px;

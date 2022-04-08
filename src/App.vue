@@ -42,8 +42,9 @@ a{
   display: flex;
   margin: 0 auto;
   flex-direction: column;
-  width: min(700px,90vw);
+  width: min(730px,90vw);
   align-items: flex-start;
+  word-break: break-all;
 }
 #categorias_container{
   width: 100%;

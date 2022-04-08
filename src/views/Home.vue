@@ -6,7 +6,7 @@
       <div id="jumbotron">
         <h1 class="jumbo_title">Bem-vindo ao Blog do Node</h1>
         <p class="jumbo_paragrafo">
-          Este é um BLOG simples, desenvolvido com Vue.js + Node.js + Express + MongoDB.
+          Este é um BLOG simples, desenvolvido com Vue.js + Node.js + MongoDB.
         </p>
         <p class="jumbo_paragrafo">
           Feito por Leal - <a href="https://www.github.com/lealalves">github.com/lealalves</a>
