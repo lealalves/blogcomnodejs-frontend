@@ -31,21 +31,22 @@ a{
   text-align: left;
 }
 #list_container{
-    width: 100%;
-    padding: 20px;
-    border: 1px solid rgb(223, 223, 223);
-    border-radius: 10px;
-    margin: 10px 0;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 10px;
+  margin: 10px 0;
+  word-break: break-all;
 }
 #container_principal{
   display: flex;
   margin: 0 auto;
   flex-direction: column;
-  width: 60vw;
+  width: min(700px,90vw);
   align-items: flex-start;
 }
 #categorias_container{
-    width: 100%;
+  width: 100%;
 }
 #form_container{
   width: 100%;
