@@ -201,8 +201,9 @@ export default {
   justify-content: flex-end;
 }
 #header_user li {
-  max-width: 200px;
+  max-width: 400px;
   overflow: hidden;
+  word-break: break-all;
   text-overflow: ellipsis;
   padding: 10px;
   background-color: #ffffff;

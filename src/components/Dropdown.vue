@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="dropdown">
     <li @click="isOpen = !isOpen">{{title}}</li>
     <transition name="fade" appear>
       <div class="sub-menu" v-show="isOpen" >
@@ -44,6 +44,7 @@ export default {
             ok: res.texto,
           },
         });
+        location.reload()
       }
     },
   },
