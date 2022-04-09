@@ -45,30 +45,40 @@ export default {
     },
     data() {
         return {
-            msgs: null,
-            categorias_data: '',
-            titulo: '',
-            slug: '',
-            descricao: '',
-            conteudo: '',
-            categoria: ''
+          msgs: null,
+          slugCheck: null,
+          categorias_data: '',
+          titulo: '',
+          slug: '',
+          descricao: '',
+          conteudo: '',
+          categoria: ''
         }
+    },
+    watch: {
+      slug(s){
+        if(s.indexOf(' ') >= 0){
+          this.slugCheck = false
+        } else this.slugCheck = true
+      }
     },
     methods: {
         async getCategorias() {                        
-            const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categorias`)
+          const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categorias`)
 
-            const res = await req.json()
-            this.categorias_data = res.categorias
+          const res = await req.json()
+          this.categorias_data = res.categorias
                 
         },
         async addPostagem() {
+          if(this.slugCheck){
+
             const data = {
-                titulo: this.titulo,
-                slug: this.slug,
-                descricao: this.descricao,
-                conteudo: this.conteudo,
-                categoria: this.categoria
+              titulo: this.titulo,
+              slug: this.slug,
+              descricao: this.descricao,
+              conteudo: this.conteudo,
+              categoria: this.categoria
             }
 
             const dataJson = JSON.stringify(data)
@@ -92,6 +102,8 @@ export default {
                     }
                 })
             }
+
+          } else this.msgs = [{texto: 'Slug não deve conter espaços em branco!'}]            
 
         }
     },

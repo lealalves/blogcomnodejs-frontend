@@ -31,14 +31,22 @@ export default {
     },
     data() {
         return {
-            nome: '',
-            slug: '',
-            msgs: []
+          slugCheck: null,
+          nome: '',
+          slug: '',
+          msgs: []
         }
+    },
+    watch: {
+      slug(s){
+        if(s.indexOf(' ') >= 0){
+          this.slugCheck = false
+        } else this.slugCheck = true
+      }
     },
     methods: {
         async addCategoria() {
-
+          if(this.slugCheck){
             const data = {
                 nome: this.nome,
                 slug: this.slug
@@ -64,6 +72,8 @@ export default {
                     }
                 })
             }
+          } else this.msgs.push({texto: 'Slug não deve conter espaços em branco!'})
+            
 
         }
     },
