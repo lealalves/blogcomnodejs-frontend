@@ -25,7 +25,6 @@ Back-end:
 - - Bcrypt
 - - Passport.js
 - - Dotenv
-- - Cors
 - Banco de dados MongoDB Cloud
 
 Repositório front-end do site, confira o back-end em: https://github.com/lealalves/blogcomnode-backend.
