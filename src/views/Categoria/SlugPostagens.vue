@@ -12,6 +12,7 @@
               <Button text="Saiba mais" />
             </router-link>
             <hr>
+            <h5 class="card_text">{{'Autor: ' + postagem.autor.nome}}</h5>
             <h5 class="card_text">Data de publicação: <Data :data_atual="postagem.date"/></h5>
         </div>
       </div>

@@ -44,7 +44,9 @@ export default {
             ok: res.texto,
           },
         });
-        location.reload()
+        setInterval(() => {
+          location.reload()
+        },1000)
       }
     },
   },

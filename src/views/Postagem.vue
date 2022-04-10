@@ -5,6 +5,7 @@
 				<div v-if="this.titulo != null" id="form_container">
 					<h1>{{titulo}}</h1>
 					<hr />
+					<small>Autor: {{this.autor}}</small><br>
 					<small>Data de publicação: <Data :data_atual="data" /></small>
 					<hr />
 					<p class="jumbo_paragrafo">{{conteudo}}</p>
@@ -35,7 +36,8 @@ export default {
 			return {
 				titulo: null,
 				data: null,
-				conteudo: null
+				conteudo: null,
+        autor: null
 			}
 		},
 		methods: {
@@ -50,6 +52,7 @@ export default {
 					this.titulo = res.postagem.titulo
 					this.data = res.postagem.date
 					this.conteudo = res.postagem.conteudo
+          this.autor = res.postagem.autor.nome
 				}
 			}
 		},

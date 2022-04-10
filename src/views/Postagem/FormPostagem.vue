@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header />
+        <Header @user-id="(e) => this.user_id = e"/>
         <div id="container_principal">
             <Message v-for="msg in msgs" :key="msg.id" :msg="msg.texto" />
             <div id="form_container">
@@ -45,6 +45,7 @@ export default {
     },
     data() {
         return {
+          user_id: null,
           msgs: null,
           slugCheck: null,
           categorias_data: '',
@@ -78,7 +79,8 @@ export default {
               slug: this.slug,
               descricao: this.descricao,
               conteudo: this.conteudo,
-              categoria: this.categoria
+              categoria: this.categoria,
+              autor: this.user_id
             }
 
             const dataJson = JSON.stringify(data)
@@ -93,7 +95,6 @@ export default {
 
             if(!res.ok){
                 this.msgs = res
-                console.log(res);
             } else{
                 this.$router.push({
                     name: 'Home',
@@ -108,7 +109,7 @@ export default {
         }
     },
     mounted() {
-        this.getCategorias()
+      this.getCategorias()
     },
 }
 </script>

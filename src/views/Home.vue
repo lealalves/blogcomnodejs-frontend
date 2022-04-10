@@ -16,14 +16,15 @@
       <hr />
       <div id="postagens_container">
           <h1 class="lista_titulo">Postagens recentes:</h1>
-          <div id="postagem_container" v-for="postagem in postagens_data" :key="postagem.id" >
+          <div id="postagem_container" v-for="postagem in postagens_data" :key="postagem._id" >
             <h2 class="postagem_titulo">{{postagem.titulo}}</h2>
             <p class="jumbo_paragrafo">{{postagem.descricao}}</p>
             <router-link :to="{name: 'Postagem', params: {slug: postagem.slug}}">
               <Button text="Saiba mais" />
             </router-link>
             <hr />
-            <small>{{postagem.categoria ? 'Categoria: ' + postagem.categoria.nome : ''}}</small><br>
+            <small>{{"Categoria: " + postagem.categoria?.nome }}</small><br>
+            <small>{{"Autor: " + postagem.autor?.nome}}</small><br>
             <small>Data de criação: <Data :data_atual="postagem.date" /></small>
           </div>
       </div>

@@ -3,7 +3,7 @@
         <h2 class="card_text">{{data.titulo}}</h2>
         <h4 class="card_text">Descrição: {{data.descricao}}</h4>
         <h5><Data :data_atual="data.date"/></h5>
-        <h5 class="card_text">{{data.categoria ? 'Categoria: ' + data.categoria.nome : ''}}</h5>
+        <h5 class="card_text">{{'Categoria: ' + data.categoria?.nome}}</h5>
         <router-link :to="{name: 'EditarPostagens', params: {id: data._id}}">
           <Button text="Editar"></Button>
         </router-link>
