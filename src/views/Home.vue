@@ -15,11 +15,20 @@
       </div>
       <hr />
       <div id="postagens_container">
-          <h1 class="lista_titulo">Postagens recentes:</h1>
+        <h1 class="lista_titulo">Postagens recentes:</h1>
+        <h3 v-if="state == 'loading'">Carregando..</h3>
+        <h3 v-else-if="postagens_data.length === 0"> Sem postagens.</h3>
+        <template v-else>
           <div id="postagem_container" v-for="postagem in postagens_data" :key="postagem._id" >
             <h2 class="postagem_titulo">{{postagem.titulo}}</h2>
             <p class="jumbo_paragrafo">{{postagem.descricao}}</p>
-            <router-link :to="{name: 'Postagem', params: {slug: postagem.slug}}">
+            <router-link 
+              :to="{
+                name: 'Postagem', 
+                params: {
+                  slug: postagem.slug
+                }
+              }">
               <Button text="Saiba mais" />
             </router-link>
             <hr />
@@ -27,6 +36,7 @@
             <small>{{"Autor: " + postagem.autor?.nome}}</small><br>
             <small>Data de criação: <Data :data_atual="postagem.date" /></small>
           </div>
+        </template>        
       </div>
     </div>
   </div>
@@ -52,6 +62,7 @@ export default {
   },
   data() {
     return {
+      state: 'loading',
       postagens_data: []
     }
   },
@@ -61,7 +72,7 @@ export default {
       const req = await fetch(`${process.env.VUE_APP_API_URL}`)
 
       const res = await req.json()
-      
+      this.state = 'ok'
       this.postagens_data = res.postagens
     }
   },

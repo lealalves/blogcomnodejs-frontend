@@ -4,7 +4,7 @@
         <div v-if="ok" id="container_principal">
             <div></div>
             <h2>Editar Categoria:</h2>
-            <Message v-for="msg in msgs" :key="msg.id" :msg="msg.texto" />
+            <Message v-for="(msg, index) in msgs" :key="index" :msg="msg.texto" />
             <div id="form_container">
                 <p>Nome:</p>
                 <Input @custom-change="this.nome = $event" v-model="nome" type="text" :value="nome" placeholder="Nome da Categoria" />

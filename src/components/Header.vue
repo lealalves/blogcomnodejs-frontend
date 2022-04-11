@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <router-link :to="{ name: '' }"><img  id="imgLogo" src="../assets/logo.jpg" alt="Logo"/></router-link>
+    <router-link :to="{ name: 'Home' }"><img  id="imgLogo" src="../assets/logo.jpg" alt="Logo"/></router-link>
     <ul v-show="!isMobile" id="header_links">
       <router-link v-for="link in header" :key="link" :to="link.url"><li>{{ link.title }}</li></router-link>
     </ul>

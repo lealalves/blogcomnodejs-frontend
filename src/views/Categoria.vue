@@ -2,14 +2,22 @@
     <div>
         <Header />
         <div id="container_principal">
-            <h1 class="lista_titulo">Categorias: </h1>
-            <hr>
+          <h1 class="lista_titulo">Categorias: </h1>
+          <hr>
+          <template v-if="categorias_data.length > 0">
             <router-link 
-            v-for="categoria in categorias_data" 
-            :key="categoria.id" 
-            :to="{name: 'SlugPostagens', params: {slug: categoria.slug}}">
+              v-for="categoria in categorias_data" 
+              :key="categoria._id" 
+              :to="{
+                name: 'SlugPostagens', 
+                params: {
+                  slug: categoria.slug
+                  }
+                }">
               <h3>{{categoria.nome}}</h3>
-            </router-link>
+            </router-link>            
+          </template>
+          <h3 v-else>Sem categorias registradas.</h3>
         </div>
     </div>
 </template>
@@ -42,7 +50,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 h3{
   font-weight: 300;
   margin: 3px 0;

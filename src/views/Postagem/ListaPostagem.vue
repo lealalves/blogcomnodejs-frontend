@@ -5,11 +5,11 @@
           <Message v-show="ok" :msg="ok" />
             <h1 class="lista_titulo">Lista de postagens:</h1>
             <router-link to="/postagens/add"><Button text="Nova Postagem"/></router-link>
-            <div id="categorias_container" v-if="postagem_data != ''">
+            <div id="categorias_container" v-if="postagem_data.length > 0">
                 <ListPost
                 @message="getPostagens(), ok = $event" 
                 v-for="postagem in postagem_data" 
-                :key="postagem.id" 
+                :key="postagem._id" 
                 :data="postagem"
                 />
             </div>
@@ -29,7 +29,7 @@ export default {
     name: 'ListaPostagem',
     data() {
         return {
-            postagem_data: ''
+            postagem_data: []
         }
     },
     components:{

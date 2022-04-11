@@ -2,31 +2,31 @@
     <div>
         <Header />
         <div v-if="ok" id="container_principal">
-            <Message v-for="msg in msgs" :key="msg.id" :msg="msg.texto" />
-            <div id="form_container">
-                <h2 class="form_title">Editar Postagem:</h2>
-                <p>Nome:</p>
-                <Input @custom-change="this.titulo = $event" v-model="titulo" type="text" :value="titulo" placeholder="Titulo da Postagem" />
-                <p>Slug:</p>
-                <Input @custom-change="this.slug = $event" v-model="slug" type="text" :value="slug" placeholder="Slug da Postagem" />
-                <p>Descrição:</p>
-                <Input @custom-change="this.descricao = $event" v-model="descricao" type="text" :value="descricao" placeholder="Descrição da Postagem" />
-                <p>Conteúdo:</p>
-                <textarea v-model="conteudo" cols="30" rows="10" class="effect-10"></textarea>
-                <p>Categoria:</p>
-                <select @click="this.categoria_id = $event.target.value" class="effect-10">
-                    <option 
-                    v-for="categoria in categorias_data" 
-                    :key="categoria._id" 
-                    :value="categoria._id">
-                    {{categoria.nome}}
-                    </option>
-                </select>
-                <Button @click="updatePostagem()" text="Editar Postagem" />
-            </div>
+          <Message v-for="(msg, index) in msgs" :key="index" :msg="msg.texto" />
+          <div id="form_container">
+              <h2 class="form_title">Editar Postagem:</h2>
+              <p>Nome:</p>
+              <Input @custom-change="this.titulo = $event" v-model="titulo" type="text" :value="titulo" placeholder="Titulo da Postagem" />
+              <p>Slug:</p>
+              <Input @custom-change="this.slug = $event" v-model="slug" type="text" :value="slug" placeholder="Slug da Postagem" />
+              <p>Descrição:</p>
+              <Input @custom-change="this.descricao = $event" v-model="descricao" type="text" :value="descricao" placeholder="Descrição da Postagem" />
+              <p>Conteúdo:</p>
+              <textarea v-model="conteudo" cols="30" rows="10" class="effect-10"></textarea>
+              <p>Categoria:</p>
+              <select @click="this.categoria_id = $event.target.value" class="effect-10">
+                  <option 
+                  v-for="categoria in categorias_data" 
+                  :key="categoria._id" 
+                  :value="categoria._id">
+                  {{categoria.nome}}
+                  </option>
+              </select>
+              <Button @click="updatePostagem()" text="Editar Postagem" />
+          </div>
         </div>
         <div v-else id="container_principal">
-            <Message msg="Essa postagem não existe." />
+          <Message msg="Essa postagem não existe." />
         </div>
     </div>
 </template>

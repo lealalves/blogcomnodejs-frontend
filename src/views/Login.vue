@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div id="container_principal">
-        <Message v-for="msg in msgs" :key="msg.id" :msg="msg.texto" />
+        <Message v-for="(msg, index) in msgs" :key="index" :msg="msg.texto" />
         <Message v-show="ok" :msg="ok" />
         <div id="form_container">
         <h2 class="form_title">Login:</h2>

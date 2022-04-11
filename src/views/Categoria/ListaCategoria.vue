@@ -5,7 +5,7 @@
           <Message v-show="ok" :msg="ok" />
           <h1>Lista de categorias:</h1>
           <router-link to="/categorias/add"><Button text="Nova Categoria"/></router-link>
-          <div id="categorias_container" v-if="categorias_data != ''">
+          <div id="categorias_container" v-if="categorias_data.length > 0">
               <List 
               @message="getCategorias(), ok = $event" 
               v-for="categoria in categorias_data" 
@@ -29,7 +29,7 @@ export default {
     name: 'ListaCategoria',
     data() {
         return {
-          categorias_data: ''
+          categorias_data: []
         }
     },
     components:{
