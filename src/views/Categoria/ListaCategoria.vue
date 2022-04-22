@@ -26,42 +26,42 @@ import Message from '../../components/Message.vue'
 import List from '../../components/List.vue'
 
 export default {
-    name: 'ListaCategoria',
-    data() {
-        return {
-          categorias_data: []
-        }
-    },
-    components:{
-        Header,
-        Button,
-        Message,
-        List,
-    },
-    props: {
-        ok: String
-    },
-    methods: {
-        async getCategorias() {                        
-            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categorias`)
+	name: 'ListaCategoria',
+	data() {
+		return {
+			categorias_data: []
+		}
+	},
+	components:{
+		Header,
+		Button,
+		Message,
+		List,
+	},
+	props: {
+		ok: String
+	},
+	methods: {
+		async getCategorias() {                        
+			const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categorias`)
 
-            const res = await req.json()
-            if(!res.ok){
-              this.$router.push({
-                name: 'Home',
-                params: {
-                ok: res.texto
-                }
-              })
-            }else {
-              this.categorias_data = res.categorias
-            }
+			const res = await req.json()
+			if(!res.ok){
+				this.$router.push({
+					name: 'Home',
+					params: {
+						ok: res.texto
+					}
+				})
+			}else {
+				this.categorias_data = res.categorias
+			}
                 
-        }
-    },
-    mounted() {
-        this.getCategorias()
-    },
+		}
+	},
+	mounted() {
+		this.getCategorias()
+	},
 }
 </script>
 

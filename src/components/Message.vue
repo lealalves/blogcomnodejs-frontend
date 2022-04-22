@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: "Message",
-  props: {
-      msg: String
-  }
+	name: "Message",
+	props: {
+		msg: String
+	}
 }
 </script>
 

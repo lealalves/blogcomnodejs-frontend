@@ -27,30 +27,30 @@
 import Header from '../components/Header.vue'
 
 export default {
-  name: 'Categoria',
-  data() {
-    return {
-      state: 'loading',
-      categorias_data: []
-    }
-  },
-  components: {
-    Header
-  },
-  methods: {
-    async getCategorias(){
-      const req = await fetch(`${process.env.VUE_APP_API_URL}categorias`)
+	name: 'Categoria',
+	data() {
+		return {
+			state: 'loading',
+			categorias_data: []
+		}
+	},
+	components: {
+		Header
+	},
+	methods: {
+		async getCategorias(){
+			const req = await fetch(`${process.env.VUE_APP_API_URL}categorias`)
 
-      const res = await req.json()
+			const res = await req.json()
       
-      this.state = 'ok'
+			this.state = 'ok'
 
-      this.categorias_data = res.categorias
-    }
-  },
-  mounted(){
-    this.getCategorias()
-  }
+			this.categorias_data = res.categorias
+		}
+	},
+	mounted(){
+		this.getCategorias()
+	}
 }
 </script>
 

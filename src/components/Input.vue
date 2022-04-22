@@ -4,11 +4,11 @@
 
 <script>
 export default {
-  name: "Input",
-  props: {
-    type: String,
-    placeholder: String,
-  }
+	name: "Input",
+	props: {
+		type: String,
+		placeholder: String,
+	}
 }
 </script>
 

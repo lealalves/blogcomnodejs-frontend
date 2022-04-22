@@ -13,9 +13,9 @@
 
 <script>
 export default {
-    name: 'Data',
-    props: {
-        data_atual: String
-    }
+	name: 'Data',
+	props: {
+		data_atual: String
+	}
 }
 </script>

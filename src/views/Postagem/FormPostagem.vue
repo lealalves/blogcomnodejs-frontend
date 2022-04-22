@@ -39,81 +39,81 @@ import Input from '../../components/Input.vue'
 import Message from '../../components/Message.vue'
 
 export default {
-  name: 'FormPostagem',
-  components: {
-    Header,
-    Button,
-    Input,
-    Message
-  },
-  data() {
-    return {
-      user_id: null,
-      msgs: null,
-      slugCheck: null,
-      categorias_data: [],
-      titulo: '',
-      slug: '',
-      descricao: '',
-      conteudo: '',
-      categoria: ''
-    }
-  },
-  watch: {
-    slug(s){
-      if(s.indexOf(' ') >= 0){
-        this.slugCheck = false
-      } else this.slugCheck = true
-    }
-  },
-  methods: {
-    async getCategorias() {                        
-      const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categorias`)
+	name: 'FormPostagem',
+	components: {
+		Header,
+		Button,
+		Input,
+		Message
+	},
+	data() {
+		return {
+			user_id: null,
+			msgs: null,
+			slugCheck: null,
+			categorias_data: [],
+			titulo: '',
+			slug: '',
+			descricao: '',
+			conteudo: '',
+			categoria: ''
+		}
+	},
+	watch: {
+		slug(s){
+			if(s.indexOf(' ') >= 0){
+				this.slugCheck = false
+			} else this.slugCheck = true
+		}
+	},
+	methods: {
+		async getCategorias() {                        
+			const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categorias`)
 
-      const res = await req.json()
+			const res = await req.json()
 
-      this.categorias_data = res.categorias
+			this.categorias_data = res.categorias
             
-    },
-    async addPostagem() {
-      if(this.slugCheck){
+		},
+		async addPostagem() {
+			if(this.slugCheck){
 
-        const data = {
-          titulo: this.titulo,
-          slug: this.slug,
-          descricao: this.descricao,
-          conteudo: this.conteudo,
-          categoria: this.categoria,
-          autor: this.user_id
-        }
+				const data = {
+					titulo: this.titulo,
+					slug: this.slug,
+					descricao: this.descricao,
+					conteudo: this.conteudo,
+					categoria: this.categoria,
+					autor: this.user_id
+				}
 
-        const dataJson = JSON.stringify(data)
+				const dataJson = JSON.stringify(data)
 
-        const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens/nova`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: dataJson
-        })
+				const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens/nova`, {
+					method: 'POST',
+					headers: {'Content-Type': 'application/json'},
+					body: dataJson
+				})
 
-        const res = await req.json()
+				const res = await req.json()
 
-        if(!res.ok){
-            this.msgs = res
-        } else{
-            this.$router.push({
-                name: 'Home',
-                params: {
-                    ok: res.texto
-                }
-            })
-        }
+				if(!res.ok){
+					this.msgs = res
+				} else{
+					this.$router.push({
+						name: 'Home',
+						params: {
+							ok: res.texto
+						}
+					})
+				}
 
-      } else this.msgs = [{texto: 'Slug não deve conter espaços em branco!'}]            
+			} else this.msgs = [{texto: 'Slug não deve conter espaços em branco!'}]            
 
-    }
-  },
-  mounted() {
-    this.getCategorias();
-  },
+		}
+	},
+	mounted() {
+		this.getCategorias()
+	},
 }
 </script>

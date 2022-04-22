@@ -20,151 +20,151 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
-import Dropdown from "./Dropdown.vue";
+import { ref } from '@vue/reactivity';
+import Dropdown from './Dropdown.vue';
 
 export default {
-  name: "Header",
-  components: {
-    Dropdown,
-  },
-  emits: ['userId'],
-  data() {
-    return {
-      user_data: null,
-      windowWidth: ref(window.innerWidth),
-      header: [
-        {
-          title: "Home",
-          url: "/",
-          is: "router-link",
-        },
-        {
-          title: "Categorias",
-          url: "/categorias",
-          is: "router-link",
-        },
-      ],
-    };
-  },
-  computed: {
-    isMobile() {
-      return this.windowWidth < 550 ? true : false;
-    },
-    isAuth() {
-      return this.user_data != null ? true : false;
-    },
-  },
-  methods: {
-    headerItens() {
-      if(this.isMobile) {
+	name: 'Header',
+	components: {
+		Dropdown,
+	},
+	emits: ['userId'],
+	data() {
+		return {
+			user_data: null,
+			windowWidth: ref(window.innerWidth),
+			header: [
+				{
+					title: 'Home',
+					url: '/',
+					is: 'router-link',
+				},
+				{
+					title: 'Categorias',
+					url: '/categorias',
+					is: 'router-link',
+				},
+			],
+		}
+	},
+	computed: {
+		isMobile() {
+			return this.windowWidth < 550 ? true : false;
+		},
+		isAuth() {
+			return this.user_data != null ? true : false;
+		},
+	},
+	methods: {
+		headerItens() {
+			if(this.isMobile) {
 
-        if(!this.isAuth){
-          this.header.push(
-            {
-              title: "Login",
-              is: "router-link",
-              url: "/login",
-            },
-            {
-              title: "Registrar",
-              is: "router-link",
-              url: "/registro"
-            }
-          )
-        }else if(this.user_data.eAdmin == 1){
-          this.header.push(
-            {
-              title: "Lista de Categorias",
-              is: "router-link",
-              url: "/listacategorias",
-            },
-            {
-              title: "Postagens",
-              is: "router-link",
-              url: "/postagens",
-            },
-            {
-              title: "Sair",
-              is: "p",
-              url: "#",
-            },
-          )
-        } else {
-          this.header.push(
-            {
-              title: "Criar postagem",
-              is: "router-link",
-              url: "/postagens/add",
-            },
-            {
-              title: "Sair",
-              is: "p",
-              url: "#",
-            },
-          )
-        }
-      }
-      if(!this.isMobile){
+				if(!this.isAuth){
+					this.header.push(
+						{
+							title: 'Login',
+							is: 'router-link',
+							url: '/login',
+						},
+						{
+							title: 'Registrar',
+							is: 'router-link',
+							url: '/registro'
+						}
+					)
+				}else if(this.user_data.eAdmin == 1){
+					this.header.push(
+						{
+							title: 'Lista de Categorias',
+							is: 'router-link',
+							url: '/listacategorias',
+						},
+						{
+							title: 'Postagens',
+							is: 'router-link',
+							url: '/postagens',
+						},
+						{
+							title: 'Sair',
+							is: 'p',
+							url: '#',
+						},
+					)
+				} else {
+					this.header.push(
+						{
+							title: 'Criar postagem',
+							is: 'router-link',
+							url: '/postagens/add',
+						},
+						{
+							title: 'Sair',
+							is: 'p',
+							url: '#',
+						},
+					)
+				}
+			}
+			if(!this.isMobile){
 
-        if(!this.isAuth){
-            this.header.push(
-            {
-              title: "Login",
-              is: "router-link",
-              url: "/login",
-            },
-            {
-              title: "Registrar",
-              is: "router-link",
-              url: "/registro"
-            }
-          )
-        } else if(this.user_data.eAdmin == 1){
-          this.header.push(
-            {
-              title: "Lista de Categorias",
-              is: "router-link",
-              url: "/listacategorias",
-            },
-            {
-              title: "Postagens",
-              is: "router-link",
-              url: "/postagens",
-            },
-          )
-        } else {
-          this.header.push(
-            {
-              title: "Criar postagem",
-              is: "router-link",
-              url: "/postagens/add",
-            },
-          )
-        }
-      }
-    },
-    onWidthChange() {
-      this.windowWidth = window.innerWidth;
-    },
-    async checkUser() {
-      const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`);
+				if(!this.isAuth){
+					this.header.push(
+						{
+							title: 'Login',
+							is: 'router-link',
+							url: '/login',
+						},
+						{
+							title: 'Registrar',
+							is: 'router-link',
+							url: '/registro'
+						}
+					)
+				} else if(this.user_data.eAdmin == 1){
+					this.header.push(
+						{
+							title: 'Lista de Categorias',
+							is: 'router-link',
+							url: '/listacategorias',
+						},
+						{
+							title: 'Postagens',
+							is: 'router-link',
+							url: '/postagens',
+						},
+					)
+				} else {
+					this.header.push(
+						{
+							title: 'Criar postagem',
+							is: 'router-link',
+							url: '/postagens/add',
+						},
+					)
+				}
+			}
+		},
+		onWidthChange() {
+			this.windowWidth = window.innerWidth;
+		},
+		async checkUser() {
+			const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios`)
 
-      const res = await req.json();
+			const res = await req.json()
 
-      this.user_data = res.usuario;
+			this.user_data = res.usuario
 
-      this.headerItens();
+			this.headerItens()
 
-      if(this.user_data != null){
-        this.$emit('userId', this.user_data._id)
-      }
-    },
-  },
-  mounted() {
-    window.addEventListener("resize", this.onWidthChange);
-    this.checkUser();
-  },
+			if(this.user_data != null){
+				this.$emit('userId', this.user_data._id)
+			}
+		},
+	},
+	mounted() {
+		window.addEventListener('resize', this.onWidthChange)
+		this.checkUser()
+	},
 };
 </script>
 

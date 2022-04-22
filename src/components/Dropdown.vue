@@ -17,39 +17,39 @@
 
 <script>
 export default {
-  name: 'Dropdown',
-  props: ['title', 'items'],
-  data() {
-    return {
-      isOpen: false
-    }
-  },
-  methods: {
-    detectEvent(e){
-      if(e.target.nodeName == 'P'){
-        this.logout()
-      }
-    },
-    async logout() {
-      const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios/logout`);
+	name: 'Dropdown',
+	props: ['title', 'items'],
+	data() {
+		return {
+			isOpen: false
+		}
+	},
+	methods: {
+		detectEvent(e){
+			if(e.target.nodeName == 'P'){
+				this.logout()
+			}
+		},
+		async logout() {
+			const req = await fetch(`${process.env.VUE_APP_API_URL}usuarios/logout`);
 
-      const res = await req.json();
+			const res = await req.json()
 
-      if(!res.ok) {
-        this.msgs = res;
-      }else {
-        this.$router.push({
-          name: "Home",
-          params: {
-            ok: res.texto,
-          },
-        });
-        setInterval(() => {
-          location.reload()
-        },1000)
-      }
-    },
-  },
+			if(!res.ok) {
+				this.msgs = res;
+			}else {
+				this.$router.push({
+					name: 'Home',
+					params: {
+						ok: res.texto,
+					},
+				})
+				setInterval(() => {
+					location.reload()
+				},1000)
+			}
+		},
+	},
 }
 </script>
 

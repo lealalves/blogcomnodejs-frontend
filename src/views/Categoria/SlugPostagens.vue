@@ -30,39 +30,39 @@ import Button from '../../components/Button.vue'
 import Message from '../../components/Message.vue'
 
 export default {
-  name: 'SlugPostagem',
-  data() {
-    return {
-      postagens_data: [],
-      categoria: null,
-    }
-  },
-  components: {
-    Header,
-    Data,
-    Button,
-    Message
-  },
-  props: {
-    slug: String
-  },
-  methods: {
-    async getPostagens() {
-      const req = await fetch(`${process.env.VUE_APP_API_URL}categorias/${this.slug}`)
+	name: 'SlugPostagem',
+	data() {
+		return {
+			postagens_data: [],
+			categoria: null,
+		}
+	},
+	components: {
+		Header,
+		Data,
+		Button,
+		Message
+	},
+	props: {
+		slug: String
+	},
+	methods: {
+		async getPostagens() {
+			const req = await fetch(`${process.env.VUE_APP_API_URL}categorias/${this.slug}`)
 
-      const res = await req.json()
+			const res = await req.json()
 
-      if(!res.ok){
-        console.log(res.texto);
-      } else {
-        this.postagens_data = res.postagens
-        this.categoria = res.categoria.nome
-      }
+			if(!res.ok){
+				console.log(res.texto)
+			} else {
+				this.postagens_data = res.postagens
+				this.categoria = res.categoria.nome
+			}
 
-    }
-  },
-  mounted() {
-    this.getPostagens()
-  },
+		}
+	},
+	mounted() {
+		this.getPostagens()
+	},
 }
 </script>

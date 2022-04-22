@@ -47,42 +47,42 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue";
-import Button from "../components/Button.vue";
-import Data from "../components/Data.vue"
+import Header from '../components/Header.vue';
+import Button from '../components/Button.vue';
+import Data from '../components/Data.vue'
 import Message from '../components/Message.vue'
 
 
 export default {
-  name: "Home",
-  components: {
-    Header,
-    Button,
-    Data,
-    Message
-  },
-  props: {
-    ok: String,
-  },
-  data() {
-    return {
-      state: 'loading',
-      postagens_data: []
-    }
-  },
-  methods: {
-    async getPostagens() {
+	name: 'Home',
+	components: {
+		Header,
+		Button,
+		Data,
+		Message
+	},
+	props: {
+		ok: String,
+	},
+	data() {
+		return {
+			state: 'loading',
+			postagens_data: []
+		}
+	},
+	methods: {
+		async getPostagens() {
 
-      const req = await fetch(`${process.env.VUE_APP_API_URL}`)
+			const req = await fetch(`${process.env.VUE_APP_API_URL}`)
 
-      const res = await req.json()
-      this.state = 'ok'
-      this.postagens_data = res.postagens
-    }
-  },
-  mounted() {
-    this.getPostagens()
-  }
+			const res = await req.json()
+			this.state = 'ok'
+			this.postagens_data = res.postagens
+		}
+	},
+	mounted() {
+		this.getPostagens()
+	}
 };
 </script>
 <style>

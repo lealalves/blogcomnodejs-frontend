@@ -22,61 +22,61 @@ import Input from '../../components/Input.vue'
 import Message from '../../components/Message.vue'
 
 export default {
-    name: 'Formulario',
-    components: {
-        Header,
-        Button,
-        Input,
-        Message
-    },
-    data() {
-        return {
-          slugCheck: null,
-          nome: '',
-          slug: '',
-          msgs: []
-        }
-    },
-    watch: {
-      slug(s){
-        if(s.indexOf(' ') >= 0){
-          this.slugCheck = false
-        } else this.slugCheck = true
-      }
-    },
-    methods: {
-        async addCategoria() {
-          if(this.slugCheck){
-            const data = {
-                nome: this.nome,
-                slug: this.slug
-            }
+	name: 'Formulario',
+	components: {
+		Header,
+		Button,
+		Input,
+		Message
+	},
+	data() {
+		return {
+			slugCheck: null,
+			nome: '',
+			slug: '',
+			msgs: []
+		}
+	},
+	watch: {
+		slug(s){
+			if(s.indexOf(' ') >= 0){
+				this.slugCheck = false
+			} else this.slugCheck = true
+		}
+	},
+	methods: {
+		async addCategoria() {
+			if(this.slugCheck){
+				const data = {
+					nome: this.nome,
+					slug: this.slug
+				}
 
-            const dataJson = JSON.stringify(data)
+				const dataJson = JSON.stringify(data)
 
-            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categorias/nova`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: dataJson
-            })
+				const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categorias/nova`, {
+					method: 'POST',
+					headers: {'Content-Type': 'application/json'},
+					body: dataJson
+				})
 
-            const res = await req.json()
+				const res = await req.json()
             
-            if(!res.ok){
-                this.msgs.push(res)
-            } else {
-                this.$router.push({
-                    name: 'Categorias',
-                    params: {
-                        ok: res.texto
-                    }
-                })
-            }
-          } else this.msgs.push({texto: 'Slug não deve conter espaços em branco!'})
+				if(!res.ok){
+					this.msgs.push(res)
+				} else {
+					this.$router.push({
+						name: 'Categorias',
+						params: {
+							ok: res.texto
+						}
+					})
+				}
+			} else this.msgs.push({texto: 'Slug não deve conter espaços em branco!'})
             
 
-        }
-    },
+		}
+	},
 }
 </script>
 

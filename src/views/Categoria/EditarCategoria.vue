@@ -26,71 +26,71 @@ import Input from '../../components/Input.vue'
 import Message from '../../components/Message.vue'
 
 export default {
-    name: 'Editar',
-    data(){
-        return {
-            ok: false,
-            msgs: [],
-            nome: '',
-            slug: ''
-        }
-    },
-    components: {
-        Header,
-        Button,
-        Input,
-        Message
-    },
-    props: {
-        id: String
-    },
-    methods: {
-        async getUniqueCategoria(){
-            const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categoria/editar/${this.id}`)
+	name: 'Editar',
+	data(){
+		return {
+			ok: false,
+			msgs: [],
+			nome: '',
+			slug: ''
+		}
+	},
+	components: {
+		Header,
+		Button,
+		Input,
+		Message
+	},
+	props: {
+		id: String
+	},
+	methods: {
+		async getUniqueCategoria(){
+			const req = await fetch(`${process.env.VUE_APP_API_URL}/admin/categoria/editar/${this.id}`)
 
-            const res = await req.json()
+			const res = await req.json()
 
-            if(!res.ok){
-                console.log(res.texto);
-            } else {
-                this.ok = true
-                this.nome = res.categoria.nome
-                this.slug = res.categoria.slug
-            }
-        },
-        async updateCategoria() {
-            const data = {
-                id: this.id,
-                nome: this.nome,
-                slug: this.slug
-            }
+			if(!res.ok){
+				console.log(res.texto)
+			} else {
+				this.ok = true
+				this.nome = res.categoria.nome
+				this.slug = res.categoria.slug
+			}
+		},
+		async updateCategoria() {
+			const data = {
+				id: this.id,
+				nome: this.nome,
+				slug: this.slug
+			}
 
-            const dataJson = JSON.stringify(data)
+			const dataJson = JSON.stringify(data)
 
-            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categoria/editar`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: dataJson
-            })
+			const req = await fetch(`${process.env.VUE_APP_API_URL}admin/categoria/editar`, {
+				method: 'POST',
+				headers: {'Content-Type': 'application/json'},
+				body: dataJson
+			})
 
-            const res = await req.json()
+			const res = await req.json()
 
-            if(!res.ok){
-                this.msgs = res
-            } else {
-                this.$router.push({
-                    name: 'ListaCategorias',
-                    params: {
-                        ok: res.texto
-                    }
-                })
-            }
+			if(!res.ok){
+				this.msgs = res
+			} else {
+				this.$router.push({
+					name: 'ListaCategorias',
+					params: {
+						ok: res.texto
+					}
+				})
+			}
 
-        }
-    },
+		}
+	},
 
-    mounted() {
-        this.getUniqueCategoria()
-    },
+	mounted() {
+		this.getUniqueCategoria()
+	},
 }
 </script>

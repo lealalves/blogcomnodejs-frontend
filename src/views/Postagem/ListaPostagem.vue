@@ -26,42 +26,42 @@ import Message from '../../components/Message.vue'
 import ListPost from '../../components/ListPost.vue'
 
 export default {
-    name: 'ListaPostagem',
-    data() {
-        return {
-            postagem_data: []
-        }
-    },
-    components:{
-        Header,
-        Button,
-        Message,
-        ListPost
-    },
-    props: {
-        ok: String
-    },
-    methods: {
-        async getPostagens() {                        
-            const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens`)
+	name: 'ListaPostagem',
+	data() {
+		return {
+			postagem_data: []
+		}
+	},
+	components:{
+		Header,
+		Button,
+		Message,
+		ListPost
+	},
+	props: {
+		ok: String
+	},
+	methods: {
+		async getPostagens() {                        
+			const req = await fetch(`${process.env.VUE_APP_API_URL}admin/postagens`)
 
-            const res = await req.json()
+			const res = await req.json()
 
-            if(!res.ok){
-              this.$router.push({
-                name: 'Home',
-                params: {
-                ok: res.texto
-                }
-              })
-            }else {
-              this.postagem_data = res.postagens
-            }
-        }
-    },
-    mounted() {
-        this.getPostagens()
-    },
+			if(!res.ok){
+				this.$router.push({
+					name: 'Home',
+					params: {
+						ok: res.texto
+					}
+				})
+			}else {
+				this.postagem_data = res.postagens
+			}
+		}
+	},
+	mounted() {
+		this.getPostagens()
+	},
 }
 </script>
 
