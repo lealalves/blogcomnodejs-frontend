@@ -6,17 +6,21 @@
       <div id="jumbotron">
         <h1 class="jumbo_title">Bem-vindo ao Blog do Leal!</h1>
         <p class="jumbo_paragrafo">
-          Este é um BLOG simples, desenvolvido com Vue.js + Node.js + MongoDB.
+          Este é um BLOG simples, desenvolvido com Vue.js + Node.js + MongoDB. <br>
+          Projeto final do curso de Node.js do canal 
+          <a style="font-style: italic" href="https://www.youtube.com/c/GuiadoProgramador" target="_blank" rel="noopener noreferrer">
+            Victor Lima - Guia do Programador
+          </a>
         </p>
         <router-link to="/registro"><Button text="Crie uma conta" /></router-link>
         <p class="jumbo_paragrafo">
-          Feito por Vinicius Leal - <a href="https://www.github.com/lealalves">github.com/lealalves</a>
+          Feito por Vinicius Leal - <a style="font-style: italic" href="https://www.github.com/lealalves" target="_blank" rel="noopener noreferrer">github.com/lealalves</a>
         </p> 
       </div>
       <hr />
       <div id="postagens_container">
         <h1 class="lista_titulo">Postagens recentes:</h1>
-        <h3 v-if="state == 'loading'">Carregando..</h3>
+        <h3 v-if="state == 'loading'">Carregando...</h3>
         <h3 v-else-if="postagens_data.length === 0"> Sem postagens.</h3>
         <template v-else>
           <div id="postagem_container" v-for="postagem in postagens_data" :key="postagem._id" >

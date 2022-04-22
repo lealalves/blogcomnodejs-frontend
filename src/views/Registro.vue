@@ -50,12 +50,10 @@ export default {
       let usuario = txt.substring(0, txt.indexOf("@"));
       let dominio = txt.substring(txt.indexOf("@")+ 1, txt.length);
 
-      if ((usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) &&
-            (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) &&
-            (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && 
-            (dominio.lastIndexOf(".") < dominio.length - 1)){
-            this.emailCheck = true
-          } else this.emailCheck = false
+      this.emailCheck = (usuario.length >=1) && (dominio.length >=3) && (usuario.search("@")==-1) &&
+        (dominio.search("@")==-1) && (usuario.search(" ")==-1) && (dominio.search(" ")==-1) &&
+        (dominio.search(".")!=-1) && (dominio.indexOf(".") >=1) && 
+        (dominio.lastIndexOf(".") < dominio.length - 1) ? true : false
     }
   },
   methods: {
