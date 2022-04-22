@@ -153,10 +153,12 @@ export default {
       const res = await req.json();
 
       this.user_data = res.usuario;
-     
+
       this.headerItens();
 
-      this.$emit('userId', this.user_data._id)
+      if(this.user_data != null){
+        this.$emit('userId', this.user_data._id)
+      }
     },
   },
   mounted() {
