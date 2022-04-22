@@ -2,7 +2,9 @@
 	<div>
 			<Header />
 			<div id="container_principal">
-				<div v-if="this.titulo != null" id="form_container">
+        <h3 v-if="state == 'loading'">Carregando...</h3>
+				<Message v-else-if="conteudo == null" msg="Postagem inexistente."/>
+				<div v-else id="form_container">
 					<h1>{{titulo}}</h1>
 					<hr />
 					<small>Autor: {{this.autor}}</small><br>
@@ -10,7 +12,6 @@
 					<hr />
 					<p class="jumbo_paragrafo">{{conteudo}}</p>
 				</div>
-				<Message v-else msg="Postagem inexistente."/>
 			</div>
 	</div>
 	
@@ -37,7 +38,8 @@ export default {
 				titulo: null,
 				data: null,
 				conteudo: null,
-        autor: null
+        autor: null,
+        state: 'loading'
 			}
 		},
 		methods: {
@@ -48,11 +50,13 @@ export default {
 
 				if(!res.ok){
 					console.log(res.texto);
+          this.state = 'error'
 				} else {
 					this.titulo = res.postagem.titulo
 					this.data = res.postagem.date
 					this.conteudo = res.postagem.conteudo
           this.autor = res.postagem.autor.nome
+          this.state = 'ok'
 				}
 			}
 		},
