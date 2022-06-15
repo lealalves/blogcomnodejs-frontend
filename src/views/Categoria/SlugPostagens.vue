@@ -1,26 +1,27 @@
 <template>
-  <div>
-    <Header />
-    <div id="container_principal">
-      <h1>{{categoria}}</h1>
-      <div style="width: 100%" v-if="categoria != null">
-        <template v-if="postagens_data.length > 0">
-          <div v-for="postagem in postagens_data" :key="postagem._id" id="list_container">
-              <h2 class="card_text">{{postagem.titulo}}</h2>
-              <p class="jumbo_paragrafo">{{postagem.descricao}}</p>
-              <router-link :to="{name: 'Postagem', params: {slug: postagem.slug}}">
-                <Button text="Saiba mais" />
-              </router-link>
-              <hr>
-              <h5 class="card_text">{{'Autor: ' + postagem.autor.nome}}</h5>
-              <h5 class="card_text">Data de publicação: <Data :data_atual="postagem.date"/></h5>
-          </div>          
-        </template>
-        <h4 v-else>Nenhuma postagem.</h4>
-      </div>
-      <Message v-else msg="Categoria inexistente."/>
-    </div>
-  </div>
+	<div>
+		<Header />
+		<div id="container_principal">
+			<h1>{{categoria}}</h1>
+			<h4 v-if="state == 'loading'">Carregando...</h4>
+			<template v-else-if="state == 'posts'">
+				<div style="width: 100%">
+					<div v-for="postagem in postagens_data" :key="postagem._id" id="list_container">
+							<h2 class="card_text">{{postagem.titulo}}</h2>
+							<p class="jumbo_paragrafo">{{postagem.descricao}}</p>
+							<router-link :to="{name: 'Postagem', params: {slug: postagem.slug}}">
+								<Button text="Saiba mais" />
+							</router-link>
+							<hr>
+							<h5 class="card_text">{{'Autor: ' + postagem.autor.nome}}</h5>
+							<h5 class="card_text">Data de publicação: <Data :data_atual="postagem.date"/></h5>
+					</div>
+				</div>
+			</template>
+			<h4 v-else-if="state == 'nopost'">Nenhuma postagem.</h4>
+			<Message v-else-if="state == 'error'" msg="Categoria inexistente."/>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -35,6 +36,7 @@ export default {
 		return {
 			postagens_data: [],
 			categoria: null,
+			state: 'loading'
 		}
 	},
 	components: {
@@ -53,10 +55,11 @@ export default {
 			const res = await req.json()
 
 			if(!res.ok){
-				console.log(res.texto)
+				this.state = 'error'
 			} else {
-				this.postagens_data = res.postagens
 				this.categoria = res.categoria.nome
+				this.postagens_data = res.postagens
+				this.state = this.postagens_data.length > 0 ? 'posts' : 'nopost'
 			}
 
 		}
