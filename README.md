@@ -30,4 +30,4 @@ Back-end:
 
 Repositório front-end do site, confira o back-end em: https://github.com/lealalves/blogcomnode-backend.
 
-Está no ar! https://blogcomnodejs.herokuapp.com/.
+
